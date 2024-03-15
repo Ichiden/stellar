@@ -8,7 +8,7 @@ import  {PersistGate}  from 'redux-persist/lib/integration/react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import axios from 'axios';
 
-// axios.defaults.baseURL = 
+axios.defaults.baseURL = "https://stellar-api-ca59.onrender.com/api";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
