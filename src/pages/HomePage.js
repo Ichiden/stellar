@@ -73,7 +73,7 @@ const HomePage = () => {
         <BannerContainer>
           <BannerLeftContainer>
             {/* <BannerImg src={bannerLeftImg} /> */}
-            <CloudinaryImg imageUrl='ztellar/psme LRC 2024/jjkvuv7vrsa34f7xs70k' height='100' width='100' maxWidth='100%' />
+            <CloudinaryImg imageUrl='ztellar/ztellar/sanj9kjlh7etnbglc2lv' height='350' width='683' maxWidth='100%' heightMain='auto' />
           </BannerLeftContainer>
 
           <BannerRightContainer>
