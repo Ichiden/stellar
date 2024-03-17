@@ -190,7 +190,7 @@ const OwnedCourseCard = ({data,setRefresher}) => {
         <Link to={`/owned/course/?courseId=${data?._id}`}>
         {/* IMAGE CONTAINER */}
         <ImageContainer>
-            <CloudinaryImg imageUrl={data?.image_url} width='240' height='120' />
+            <CloudinaryImg imageUrl={data?.image_url} width='1280' height='720' widthMain='100%' heightMain='100%' objectFit='cover' borderRadius='15px' />
         </ImageContainer>
 
         {/* TYPE CONTAINER */}

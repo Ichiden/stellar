@@ -1,24 +1,27 @@
 import React from 'react'
 import vizcomSmallLogo from '../icons/vizcomSmallLogo.svg'
-import sampleEvent from '../icons/sampleEvent.svg'
 import styled from 'styled-components'
+import CloudinaryImg from '../components/Author/CloudinaryImg'
 
 import {
   Container,
   Sidings,
   Wrapper,
   BannerContainer,
-  WelcomeMessageContainer,
-  BannerCon,
-  MessageBlackText,
-  FreeDiv,
-  MessageBlueText,
-  SmallTextMessage,
+  TaglineContainer,
+  TaglineLeftContainer,
+  TaglineRightContainer,
+  TaglineMessage,
+  TaglineText,
   PoweredBy,
-  SmallLogo,
-  VizContainer,
-  LogoText,
-  BannerTop
+  PoweredByContainer,
+  PoweredByLogo,
+  PoweredByTitle,
+  BottomContainer,
+  BannerImg,
+  BannerLeftContainer,
+  BannerRightContainer,
+  Hr
 } from '../styles/Homepage.style'
 
 const Img = styled.img`
@@ -33,42 +36,51 @@ const HomePage = () => {
       <Sidings />
       <Wrapper>
         {/* TOP CONTAINER */}
-        <BannerContainer>
-            {/* BANNER TOP */}
-            <BannerTop></BannerTop>
 
-            {/* MESSAge */}
-            <WelcomeMessageContainer>
-              <MessageBlackText>New</MessageBlackText>&nbsp;&nbsp;
-              <MessageBlueText>SKILL,</MessageBlueText>
-              <MessageBlackText>Welcomes</MessageBlackText>
-              <MessageBlueText>Opportunities.</MessageBlueText>
-              <MessageBlackText>Yours For The Taking.</MessageBlackText>
+        
+        {/* BOTTOM CONTAINER START */}
+        <BottomContainer>
+        {/* TAGLINE MAIN CONTAINER */}
+        <TaglineContainer>
+          {/* TAGLINE LEFT CONTAINER */}
+          <TaglineLeftContainer>
+            <TaglineMessage>
+            Connecting <b>MINDS</b>,<br /> 
+            Redefining <b>LEARNING</b> and <br />
+            <b>COLLABORATION</b>
+            </TaglineMessage>
+          </TaglineLeftContainer>
 
-            {/* SMALL MESSAGE */}
-            <SmallTextMessage>
-            Start exploring and learn new skills with us from our greatest instructor.
-            Learn now, price starts at Php499.
-            </SmallTextMessage>
+          {/* TAGLINE RIGHT CONTAINER */}
+          <TaglineRightContainer>
+            <TaglineText>
+            <b>ZTELLAR</b> is your Reliable Companion<br />
+            Streamlining Events & Learning.
+            </TaglineText>
 
             <PoweredBy>Powered by</PoweredBy>
-
-            <VizContainer>
-              <SmallLogo src={vizcomSmallLogo} />
-              <LogoText><i>Vizcom Corporation</i></LogoText>
-            </VizContainer>
-
-
-
-            </WelcomeMessageContainer>
-            <FreeDiv />
+            <PoweredByContainer>
+              <PoweredByLogo src={vizcomSmallLogo} />
+              <PoweredByTitle><i>Vizcom Corporation</i></PoweredByTitle>
+            </PoweredByContainer>
+          </TaglineRightContainer>
+        </TaglineContainer>
+        {/* TAGLINE MAIN CONTAINER END */}
 
 
-            <BannerCon>
-              <Img src={sampleEvent} />
-            </BannerCon>
+        </BottomContainer>
 
+        <BannerContainer>
+          <BannerLeftContainer>
+            {/* <BannerImg src={bannerLeftImg} /> */}
+            <CloudinaryImg imageUrl='ztellar/psme LRC 2024/jjkvuv7vrsa34f7xs70k' height='100' width='100' maxWidth='100%' />
+          </BannerLeftContainer>
+
+          <BannerRightContainer>
+            <CloudinaryImg imageUrl='ztellar/psme LRC 2024/qsniqu3fmmxehktnj3zc' height='350' width='683' widthMain='100%' heightMain='auto' />
+          </BannerRightContainer>
         </BannerContainer>
+
       </Wrapper>
       <Sidings />
     </Container>

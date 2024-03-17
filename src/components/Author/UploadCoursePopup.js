@@ -38,6 +38,7 @@ function UploadCoursePopup({as,animate,initial,transition,setUploadOpener,setRef
   const token = cookies.get('token');
   const [image, setImage] = useState('');
   const [video, setVideo] = useState('');
+  const [type, setType] = useState('');
 
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
@@ -147,7 +148,7 @@ function UploadCoursePopup({as,animate,initial,transition,setUploadOpener,setRef
       const res = await axios({
         method:'POST',
         url:'/course/create-course',
-        data:{title,price,category,desc,imageUrl,videoUrl,token},
+        data:{title,price,category,desc,imageUrl,videoUrl,type,token},
         include:{withCredentials:true}
       })
       setAllErrorHandler('');
@@ -203,6 +204,14 @@ function UploadCoursePopup({as,animate,initial,transition,setUploadOpener,setRef
           <SelectCategory onChange={e => setCategory(e.target.value)}>
             <OptionCategory value='Engineering'>Engineering</OptionCategory>
             <OptionCategory value='IT'>IT</OptionCategory>
+          </SelectCategory>
+        </SelectCategoryContainer>
+
+        {/* TYPE INPUT */}
+        <SelectCategoryContainer>
+          <SelectCategory onChange={e => setType(e.target.value)}>
+            <OptionCategory value='Course'>Course</OptionCategory>
+            <OptionCategory value='Event'>Event</OptionCategory>
           </SelectCategory>
         </SelectCategoryContainer>
 

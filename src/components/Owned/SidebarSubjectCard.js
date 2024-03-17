@@ -76,6 +76,9 @@ const SidebarSubjectCard = (props) => {
         return e._id === props.data._id._id
     })
 
+
+    
+
   return (
     <>
     <Container onClick={videosliderfunction}>
@@ -94,7 +97,7 @@ const SidebarSubjectCard = (props) => {
     <VideoListContainer>
         {props?.data?.videos?.map((vid,i) => {
             return(
-                <SidebarVideocard setSidebarCloser={props.setSidebarCloser} isFetched={props.isFetched} setPlayState={props.setPlayState} recentSubjectData={recentSubjectData} subjectIndex={props.index} count={props?.data?.videos.length} data={vid} index={i} key={i} setVideoData={props.setVideoData}  />
+                <SidebarVideocard subjectData={props?.data?._id?.link} setSidebarCloser={props.setSidebarCloser} isFetched={props.isFetched} setPlayState={props.setPlayState} recentSubjectData={recentSubjectData} subjectIndex={props.index} count={props?.data?.videos.length} data={vid} index={i} key={i} setVideoData={props.setVideoData}  />
             )
         })}
     </VideoListContainer>

@@ -5,11 +5,12 @@ import {thumbnail} from "@cloudinary/url-gen/actions/resize";
 import styled from 'styled-components';
 
 
-function CloudinaryImg({imageUrl,width,height}) {
+// function CloudinaryImg({imageUrl,width,height,heightMain,widthMain,marginLeft,marginRight,border,borderRadius,boxSizing,marginTop}) {
+  function CloudinaryImg({imageUrl,width,height,heightMain,widthMain,marginLeft,marginRight,border,borderRadius,boxSizing,marginTop,maxWidth,objectFit}) {
   // Create a Cloudinary instance and set your cloud name.
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'diblak4eh'
+      cloudName: 'dbagrkam0'
     }
   });
 
@@ -18,7 +19,18 @@ function CloudinaryImg({imageUrl,width,height}) {
   myImage
   .resize(thumbnail().width(width).height(height))
   return (
-    <AdvancedImage style={{borderRadius:'16px',width:'100%',height:'100%',objectFit:'cover'}} cldImg={myImage} /> 
+    <AdvancedImage style={{
+      marginTop:marginTop,
+      height:heightMain,
+      marginLeft:marginLeft,
+      marginRight:marginRight,
+      border:border,
+      borderRadius:borderRadius,
+      boxSizing:boxSizing,
+      maxWidth:maxWidth,
+      width:widthMain,
+      objectFit:objectFit
+    }} cldImg={myImage} /> 
   )
 }
 

@@ -46,7 +46,7 @@ const CloudinaryVideoComponent = (props) => {
     const cloudinaryRef = useRef();
     const videoRef = useRef();
 
-    console.log(props?.videoData)
+    // console.log(props?.videoData)
 
     // console.log(props?.videoData?.currentTime)
 
@@ -77,7 +77,7 @@ const CloudinaryVideoComponent = (props) => {
         
         cloudinaryRef.current = window.cloudinary;
         cloudinaryRef.current.videoPlayer(videoRef.current, {
-          cloud_name: 'diblak4eh',
+          cloud_name: 'dbagrkam0',
           sourceTypes: ['hls'],
           controls:true,
         })
@@ -139,7 +139,7 @@ const CloudinaryVideoComponent = (props) => {
       clearInterval(myInterval.current)
     }
 
-    console.log(props.videoUrl)
+    // console.log(props.videoUrl)
 
   return (
     <>

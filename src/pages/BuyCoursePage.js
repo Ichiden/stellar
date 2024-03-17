@@ -1,9 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { loginSuccess } from '../state/userSlice';
 
 // SELECT CSS
 import '../styles/select.css'
@@ -12,6 +11,7 @@ import '../styles/select.css'
 import PaypalButton from '../components/Paypal/PaypalButton';
 import { useQuery } from 'react-query';
 import PaymongoButton from '../components/Paymongo/PaymongoButton';
+import CloudinaryImg from '../components/Author/CloudinaryImg';
 
 const Container = styled.div`
     width:500px;
@@ -149,6 +149,7 @@ const BuyCoursePage = () => {
     const location = useLocation();
     const query = new URLSearchParams(location.search);
     const courseId = query.get('id');
+    const user = useSelector(state => state.user.currentUser);
 
 
 
@@ -176,11 +177,16 @@ const BuyCoursePage = () => {
     }
 
     console.log(data?.type)
+    let PHP = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'PHP',
+    });
 
     // console.log(price)
 
     const f2f = `${data?.f2f_price}/f2f`;
     const virtual = `${data?.virtual_price}/virtual`
+    const jpsme = `${data?.jpsme_price}/JPSME`
 
     const finalPrice = price.split('/')[0];
     const registrationType = price.split('/')[1];
@@ -192,7 +198,7 @@ const BuyCoursePage = () => {
         <>
         <Container>
             <ImageContainer>
-                
+                <CloudinaryImg imageUrl='ztellar/psme LRC 2024/qsniqu3fmmxehktnj3zc' width='1366' height='800' widthMain='100%' heightMain='100%' objectFit='cover' borderRadius='15px' />
             </ImageContainer>
 
             {/* DETAILS CONTAINER */}
@@ -213,9 +219,12 @@ const BuyCoursePage = () => {
                 {/* SELECT REGISTRATION */}
                 <Select value={price} onChange={e => setPrice(e.target.value)}>
                     <Option value={0}>Choose Registration</Option>
-                    <Option value={f2f}>Face to Face Registration Fee - {data?.f2f_price}</Option>
-                    <Option value={virtual}>Virtual Registration Fee - {data?.virtual_price}</Option>
-                    
+                    <Option value={f2f}>Face to Face Registration Fee - {PHP.format(data?.f2f_price)}</Option>
+                    <Option value={virtual}>Virtual Registration Fee - {PHP.format(data?.virtual_price)}</Option>
+                    {user?.role === 'student'
+                    &&
+                    <Option value={jpsme}>JPSME Registration Fee - {PHP.format(data?.jpsme_price)}</Option>
+                    }
                 </Select>
 
                 {/* SUB TITLE */}

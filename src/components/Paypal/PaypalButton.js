@@ -14,7 +14,7 @@ const PaypalButton = (props) => {
   const dispatch = useDispatch();
   const token = cookies.get('token');
 
-  console.log(props.price)
+  console.log(props.regType)
 
     const initialOptions = {
         clientId: "AYKivNXng23tmDSnAlojUmuWuSg1UBXuXumOR8fAwjlYq6dXF2exT86ByQGaNwbvZdm-JbkAoBRM0pKA",
@@ -25,19 +25,21 @@ const PaypalButton = (props) => {
         // Order is created on the server and the order id is returned
 
         try{
-          return await fetch("/paypal/orders", {
+          return await fetch("http://localhost:5000/api/paypal/orders", {
             method: "POST",
              headers: {
               "Content-Type": "application/json",
             },
             // use the "body" param to optionally pass additional order information
             // like product skus and quantities
-            body: JSON.stringify({
+            // data: 
+            // {price: props.price,
+            // title: props.data?.title,}
+            body:JSON.stringify({
                 product: 
                   {
                     price: props.price,
                     title: props.data?.title,
-                    token: token
                   },
               }),
           })
@@ -52,12 +54,17 @@ const PaypalButton = (props) => {
          // Order is captured on the server and the response is returned to the browser
          console.log(props.price)
 
+         console.log(props.regType)
+
         
          try{
           const result = await axios({
             method:"POST",
-            url:"/paypal/orders/capture",
-            data:{orderID: data.orderID,productId:props.data?._id,regtype:props.regType,token:token},
+            url:"http://localhost:5000/api/paypal/orders/capture",
+            data:{orderID: data.orderID,
+              productId:props.data?._id,
+              regType:props.regType,
+              token:token},
             headers: {
               "Content-Type": "application/json",
             },
@@ -80,7 +87,7 @@ const PaypalButton = (props) => {
                   payer_id: data?.payerID,
                   payment_id: data?.paymentID,
                   facilitator_access_token: data?.facilitatorAccessToken,
-                  token
+                  token:token
                 },
                 headers: {
                   "Content-Type": "application/json",

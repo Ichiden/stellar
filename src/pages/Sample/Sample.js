@@ -4,65 +4,30 @@ import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import { useBeforeUnload } from "react-router-dom";
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
-
-
-
-
-const price = 14340;
-
-// Format the price above to PHP using the locale, style, and currency.
-let USDollar = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'PHP',
-});
-
-
-const Container = styled.div`
-  width:60px;
-  background-color: green;
-`
-
-const Rec = styled.div`
-  width:60px;
-  height:20px;
-  background-color: blue;
-`
-
-const Arrow = styled.div`
-  width: 0; 
-  height: 0; 
-  border-left: 30px solid transparent;
-  border-right: 30px solid transparent;
-  
-  border-top: 10px solid blue;
-`
-
-const Div = styled.div`
-  margin-left: 100px;
-  margin-top: 100px;
-`
-
-
-
+import { PDFViewer } from '@react-pdf/renderer';
+import PdfCertificate from '../../components/Owned/PdfCertificate';
+import { useSelector } from 'react-redux';
 const Sample = () => {
-
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      console.log('samsan')
-    },3000)
-
-    return () => clearInterval(interval)
-  },[])
-
-
+  // const user = useSelector(state => state.user.currentUser);
+  const user = useSelector(state => state.user.currentUser);
   return (
     <>
+    <PDFViewer>
+      <PdfCertificate fname={user?.fname} mname={user?.mname} lname={user?.lname} />
+    </PDFViewer>
+
+
+
+    <PDFDownloadLink document={<PdfCertificate fname={user?.fname} mname={user?.mname} lname={user?.lname} />} fileName='SAMPLE'>
+    <button>DOWNLOAD</button>
 
       
+    </PDFDownloadLink>
+      
 
-
+    <p>asdasd</p>
           
 
     </>

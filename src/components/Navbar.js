@@ -8,13 +8,10 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 
 // ICONS
-import cartIcon from '../icons/cart.png'
-import profIcon from '../icons/prof.jpg' 
+
 import dropdown from '../icons/dropdown.png' 
 import searchIcon from '../icons/search.png'
 import burgerIcon from '../icons/burger.png'
-import logo from '../icons/logo.png'
-import userIcon from '../icons/user-icon.jpg'
 
 // COMPONENTS
 import DropDownContainerPopup from './DropDownContainerPopup'
@@ -25,6 +22,7 @@ import MobileIconSlide from './MobileIconSlide'
 import MobileSearchDropdown from './MobileSearchDropdown'
 import AuthorDashboardRestrictionPopup from './AuthorDashboardRestrictionPopup'
 import BurgerPopup from './BurgerPopup'
+import CloudinaryImg from './Author/CloudinaryImg'
 
 // STYLES
 import {
@@ -69,6 +67,19 @@ const BackgroundCloser = styled.div`
     opacity:.4;
 `
 
+const NavbarUserIcon = styled.div`
+    width:45px;
+    height:45px;
+    background-color: gray;
+    border-radius: 50%;
+    cursor:pointer;
+    margin:0 10px;
+
+    @media (min-width:800px){
+        display:none;
+    }
+`
+
 
 function Navbar(query) {
     // COMPONENTS STATE
@@ -110,7 +121,8 @@ function Navbar(query) {
     <NavbarContainer>
             {/* LEFT CONTAINER START */}
             <LeftContainer>
-                <Logo src={logo} />
+                {/* <Logo src={logo} /> */}
+                <CloudinaryImg imageUrl='ztellar/ztellar/luctbarw5pzfsk4bgkfl'  height='60' width='auto' heightMain='50px' widthMain='auto' marginLeft='10px' />
             </LeftContainer>
             {/* LEFT CONRAINER END */}
             
@@ -153,9 +165,10 @@ function Navbar(query) {
                 <>
                 <UserContainerForDesktop>
                 {/* <CartIcon src={cartIcon} /> */}
-                <UserIcon src={userIcon} />
+                {/* <UserIcon src={userIcon} /> */}
+                <CloudinaryImg imageUrl='ztellar/ztellar/pzoz9wj3y3onkg62dcdx' height='60' width='auto' heightMain='50px' widthMain='auto' marginLeft='10px' marginRight='10px' borderRadius='50%' border='2px solid #2B6EC1' />
                 <UserDetailsContainer>
-                    <Username>{user?.username}</Username>
+                    <Username>{user?.fname} {user?.lname}</Username>
                     <Role>{user?.role}</Role>
                 </UserDetailsContainer>
                     
@@ -163,7 +176,13 @@ function Navbar(query) {
                     <DropdownIcon src={dropdown} />
                 </DropdownIconContainer>
                 </UserContainerForDesktop>
-                <UserIconDropDown src={userIcon} onClick={e => setOpenMobileIconSlide(true)}/>
+
+
+                {/* PHONE NAVBAR USER ICON */}
+                <NavbarUserIcon onClick={e => setOpenMobileIconSlide(true)}>
+                    <CloudinaryImg imageUrl='ztellar/ztellar/pzoz9wj3y3onkg62dcdx' height='100' width='100' heightMain='100%' boxSizing='border-box' widthMain='100%'  borderRadius='50%' border='3px solid #2B6EC1' />
+                </NavbarUserIcon>
+                
                 </>
                 // LOGGED IN END
                 :

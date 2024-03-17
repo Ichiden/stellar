@@ -12,7 +12,7 @@ const CloudinaryVideoOrdinary = (props) => {
 
         cloudinaryRef.current = window.cloudinary;
         cloudinaryRef.current.videoPlayer(videoRef.current, {
-            cloud_name: 'diblak4eh',
+            cloud_name: 'dbagrkam0',
             sourceTypes: ['hls'],
             controls:true,
         })

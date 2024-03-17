@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { useGoogleLogin } from '@react-oauth/google';
 import { useDispatch } from 'react-redux'
 import { loginSuccess } from '../state/userSlice'
 
 
 // ICONS
-import fbIcon from '../icons/fb.png'
 import googleIcon from '../icons/google.png'
 import sunPic from '../icons/sun.png'
 import { useSelector } from 'react-redux'

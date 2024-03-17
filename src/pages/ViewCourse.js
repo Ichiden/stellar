@@ -7,13 +7,13 @@ import styled from 'styled-components'
 
 // ICONS
 import {FaStar} from 'react-icons/fa';
-import userIcon from '../icons/user-icon.jpg'
 
 // COMPONENTS
 import CloudinaryVideoOrdinary from '../components/CloudinaryVideoOrdinary'
 import SubjectCardOnViewPage from '../components/SubjectCardOnViewPage'
 import FeedbackCard from '../components/Feedback/FeedbackCard'
 import FeedbackShowAllPopup from '../components/Feedback/FeedbackShowAllPopup'
+import CloudinaryImg from '../components/Author/CloudinaryImg'
 
 import {
     Container,
@@ -77,6 +77,7 @@ const ViewCourse = () => {
     const [feedbbackPopupOpener, setFeedbackPopupOpener] = useState(false)
 
     const [currentValue, setCurrentValue] = useState(0)
+    const [starValue, setStarValue] = useState(0)
     const stars = Array(5).fill(0);
     const colors = {
         orange:"#FFD600",
@@ -96,6 +97,8 @@ const ViewCourse = () => {
                 url:`/course/get-single-active-course?id=${courseId}`,
                 include:{withCredentials:true}
             })
+            setCurrentValue(res?.data?.average_rating)
+            setStarValue(Math.round(res?.data?.average_rating))
             return res?.data
         }
     })
@@ -105,6 +108,8 @@ const ViewCourse = () => {
             <Spinner />
         )
     }
+
+    console.log(Math.round(currentValue * 10) / 10)
 
     var date = new window.Date(data?.createdAt);
 
@@ -148,7 +153,7 @@ const ViewCourse = () => {
                             <BuyButtonTablet>Buy now</BuyButtonTablet>
                         </Link>
                         :
-                        <Link to={`/course?id=65ef3843a8c721473a33c731`}>
+                        <Link to={`/course?id=65f717865b1141c627d5f92e`}>
                             <BuyButtonTablet>Buy this course to avail the event</BuyButtonTablet>
                         </Link>
                         }
@@ -171,7 +176,7 @@ const ViewCourse = () => {
                     {/* OUTLINE */}
                     <TitleContainer>
                         <SubTitle>Outline</SubTitle>
-                        {data.subjects.map((subjects,i) => {
+                        {data?.subjects.map((subjects,i) => {
                             return(
                                 <SubjectCardOnViewPage key={i} data={subjects} number={i} />
                             )
@@ -199,7 +204,7 @@ const ViewCourse = () => {
                             <BuyButton>Buy now</BuyButton>
                         </Link>
                         :
-                        <Link to={`/course?id=65ef3843a8c721473a33c731`}>
+                        <Link to={`/course?id=65f717865b1141c627d5f92e`}>
                             <BuyButton>Buy this course to avail the event</BuyButton>
                         </Link>
                         }
@@ -214,7 +219,7 @@ const ViewCourse = () => {
                     {/* RATINGS CONTAINER */}
                     <RatingsContainer>
                         <RatingsTopContainer>
-                            <RatingsText style={{fontWeight:'bold',display:'inline-block'}}>{data?.average_rating} (stars)</RatingsText>
+                            <RatingsText style={{fontWeight:'bold',display:'inline-block'}}>{Math.round(currentValue * 10) / 10} (stars)</RatingsText>
                             <StarContainer>
                             {stars.map((_,index) => {
                                 return(
@@ -225,7 +230,7 @@ const ViewCourse = () => {
                                         marginRight:'5',
                                         cursor:"pointer",
                                     }}
-                                    color={(currentValue) > index ? colors.orange : colors.gray}
+                                    color={(starValue) > index ? colors.orange : colors.gray}
                                     />
                                 )
                             })}
@@ -278,10 +283,11 @@ const ViewCourse = () => {
                     {/* AUTHOR CONTAINER START */}
                     <AuthorContainer>
                         <AuthorImageContainer>
-                            <AuthorImg src={userIcon} />
+                            <CloudinaryImg imageUrl='ztellar/ztellar/pzoz9wj3y3onkg62dcdx' height='60' width='auto'  widthMain='100%' borderRadius='50%' border='2px solid #2B6EC1' />
                         </AuthorImageContainer>
                         <AuthorName>{data?.author_id?.username}</AuthorName>
-                        <AuthorRole>{data?.author_id?.role}</AuthorRole>
+                        <AuthorRole>Author</AuthorRole>
+                        {/* {data?.author_id?.role} */}
                         {/* <AuthorMessage>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</AuthorMessage> */}
                     </AuthorContainer>
 

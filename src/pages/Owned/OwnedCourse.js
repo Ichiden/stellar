@@ -45,6 +45,10 @@ const StarContainer = styled.div`
     margin-left: 5px;
 `
 
+const LinkTitle = styled.p`
+  font-weight: bold;
+`
+
 const OwnedCourse = () => {
   const [sidebarCloser, setSidebarCloser] = useState(false);
   const [videoData, setVideoData] = useState('');
@@ -60,13 +64,15 @@ const OwnedCourse = () => {
         gray:"#a9a9a9"
     }
 
-    console.log(videoData)
+    // console.log(videoData)
 
     
 
   const location = useLocation();
   const query = new URLSearchParams(location.search);
   const courseId = query.get('courseId');
+
+  console.log(currentValue)
 
   const {data:data, isLoading:dataLoading} = useQuery({
     queryKey:[courseId],
@@ -76,10 +82,13 @@ const OwnedCourse = () => {
         url:`/course/get-single-owned-course?courseId=${courseId}&token=${token}`,
         include:{withCredentials:true}
       });
-      setCurrentValue(res?.data?.average_rating)
+      setCurrentValue(Math.round(res?.data[0]?.average_rating))
+      // console.log(res?.data[0]?.average_rating)
       return res?.data
     }
   })
+
+
 
   const {data:userData,isLoading:userLoading,isFetched} = useQuery({
     queryKey:['data',currentTime],
@@ -97,11 +106,14 @@ const OwnedCourse = () => {
     return <Spinner />
   }
 
+
+
   var date = new window.Date(data[0]?.createdAt);
-  // console.log(data[0])
+
+
 
   return (
-    <Container>
+      <Container>
       <Sidings />
       <MainWrapper>
         {sidebarCloser 
@@ -129,7 +141,7 @@ const OwnedCourse = () => {
           :
           <div />
           }
-          <Title><p style={{fontWeight:'bold',display:'inline-block'}}>Subject {Number(videoData.subjectIndex )+ 1}</p>  / Part {Number(videoData.index) + 1} : {videoData.title}</Title>
+          <Title><p style={{fontWeight:'bold',display:'inline-block'}}>Subject {Number(videoData.subjectIndex )+ 1}</p>  / Part {Number(videoData?.index) + 1} : {videoData?.title}</Title>
           
         </WrapperHeader>
         {/* HEADER END */}
@@ -150,6 +162,24 @@ const OwnedCourse = () => {
               <CourseDescription>Course Description</CourseDescription>
               <CourseDescText>{data[0]?.desc} </CourseDescText>
             </CourseTitleContainer>
+            
+            {/* VIDEO TIILE */}
+            <CourseTitleContainer>
+              <p>Video title: {videoData.title}</p>
+            </CourseTitleContainer>
+
+            {/* LINK COTNAINER */}
+            
+            {videoData?.subjectLink &&
+            <>
+              <CourseTitleContainer>
+              <LinkTitle>Click the link to book an appointment.</LinkTitle>
+              <p>Link: <a href={`${videoData?.subjectLink}`}>{videoData?.subjectLink}</a> </p>
+              </CourseTitleContainer>
+            </>
+            }
+
+            
 
             {/* COURSE OBJECTIVES */}
             {/* <CourseTitleContainer>
@@ -162,7 +192,7 @@ const OwnedCourse = () => {
           <RightContainer>
             <RatingsContainer>
               <RatingsTopContainer>
-                <RatingsTextBlack style={{marginRight:'10px',fontWeight:'bold'}}>{data[0]?.average_rating} (stars)</RatingsTextBlack>
+                <RatingsTextBlack style={{marginRight:'10px',fontWeight:'bold'}}>{Math.round(data[0]?.average_rating * 10) / 10} (stars)</RatingsTextBlack>
                 <StarContainer>
                 {stars.map((_,index) => {
                     return(
@@ -188,6 +218,7 @@ const OwnedCourse = () => {
               <RatingsTextBlack style={{color:'#6C6A6A'}}>Date Published: {date.toLocaleDateString('en-US')}</RatingsTextBlack>
               
             </RatingsContainer>
+            
           </RightContainer>
         </BottomContainer>
 
@@ -195,6 +226,8 @@ const OwnedCourse = () => {
       </MainWrapper>
       <Sidings />
     </Container>
+    
+    
   )
 }
 

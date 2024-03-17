@@ -3,13 +3,9 @@ import styled from 'styled-components'
 
 // COMPONENTS
 import CloudinaryImg from './Author/CloudinaryImg'
-import EventSearchCard from './EventSearchCard'
 
 // ICONS
-import ratingsIcon from '../icons/five-star.png'
-import thumbnailIcon from '../icons/mean.png'
 import {FaStar} from 'react-icons/fa';
-import sampleEvent from '../icons/sampleEvent.svg'
 
 const Container = styled.div`
     padding:10px;
@@ -139,15 +135,15 @@ function CardSearch({dat}) {
         :
         <ImgContainer src={sampleEvent} />
         } */}
-        <CloudinaryImg imageUrl={dat?.image_url} width='240' height='120' />
+        <CloudinaryImg imageUrl={dat?.image_url} width='240' height='120' widthMain='100%' heightMain='100%' objectFit='cover' borderRadius='15px' />
         
     </ThumbnailContainer>
     {/* TITLE SHOULD 30 CHARACTERS ABOVE */}
     <Title>{dat?.title}</Title>
-    <Author>Author: {dat?.author_name}</Author>
+    {/* <Author>Author: {dat?.author_name}</Author> */}
 
     <RatingsContainer>
-        <RatingsDetails>{dat?.average_rating}</RatingsDetails>
+        <RatingsDetails>{Math.round(dat?.average_rating * 10) / 10}</RatingsDetails>
 
         <StarContainer>
         {stars.map((_,index) => {
@@ -171,7 +167,7 @@ function CardSearch({dat}) {
     <CreatedAt>Created At: {date.toLocaleDateString('en-US')}</CreatedAt>
     <CreatedAt>Type:&nbsp; {dat?.type.toUpperCase()}</CreatedAt>
 
-    <Price>{PHP.format(dat?.price)}</Price>
+    {/* <Price>{PHP.format(dat?.price)}</Price> */}
 
     </Container>
 

@@ -27,6 +27,7 @@ export const LeftContainer = styled.div`
     /* background-color: red; */
     display:flex;
     align-items: center;
+    margin-right: 20px;
 
     @media (max-width: 1110px) {
         width:80px;

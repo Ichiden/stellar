@@ -3,16 +3,12 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
-
-// COMPONENTS
-import AuthorDashboardRestrictionPopup from './AuthorDashboardRestrictionPopup'
-
+import Cookies from 'universal-cookie';
+import CloudinaryImg from './Author/CloudinaryImg'
 
 // ICONS
 import { logout } from '../state/userSlice'
 import axios from 'axios'
-import userIcon from '../icons/user-icon.jpg'
 
 const Container = styled.div`
     width:300px;
@@ -135,6 +131,7 @@ function DropDownContainerPopup({as,animate,initial,transition,user_data,setOpen
     const user = useSelector(state => state.user.currentUser);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const cookies = new Cookies(null, { path: '/' });
     
     // LOGOUT
     const LogoutFunction = async() => {
@@ -147,6 +144,7 @@ function DropDownContainerPopup({as,animate,initial,transition,user_data,setOpen
             console.log(res)
             dispatch(logout())
             setOpenDropdownContainer(false)
+            cookies.remove('token')
             navigate('/')
         }catch(err){
             console.log(err)
@@ -162,11 +160,12 @@ function DropDownContainerPopup({as,animate,initial,transition,user_data,setOpen
     <Container as={as} animate={animate} initial={initial} transition={transition}>
         <TopContainer>
             <UserIconContainer>
-                <UserIcon src={userIcon} />
+                {/* <UserIcon src={userIcon} /> */}
+                <CloudinaryImg imageUrl='ztellar/ztellar/pzoz9wj3y3onkg62dcdx' height='100' width='100' heightMain='100%' boxSizing='border-box' widthMain='100%'  borderRadius='50%' border='2px solid #2B6EC1' />
             </UserIconContainer>
             
-            <Username>{user_data?.username}</Username>
-            <Gmail>{user_data?.email}</Gmail>
+            <Username>{user?.fname} {user?.lname}</Username>
+            <Gmail>{user?.email}</Gmail>
         </TopContainer>
         
         <Hr />

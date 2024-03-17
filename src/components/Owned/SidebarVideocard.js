@@ -68,6 +68,7 @@ const Time = styled.p`
 const SidebarVideocard = (props) => {
   props.data.index = props.index
   props.data.subjectIndex = props.subjectIndex
+  props.data.subjectLink = props.subjectData
 
   const [remainingTime,setRemainingTime] = useState('');
   

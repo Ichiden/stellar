@@ -41,6 +41,7 @@ const TitleInput = styled.input`
     font-size: 15px;
     border:1px solid #1A66CC;
     outline: none;
+    margin-bottom: 10px;
 `
 
 const Button = styled.button`
@@ -91,6 +92,7 @@ const ErrorHandlerContainer = styled.div`
 
 function AddSubjectPopup({setOpenSubjectPopup,as,animate,initial,transition,courseId,setRefesher,courseTitle}) {
     const [title,setTitle] = useState('');
+    const [link, setLink] = useState('');
     const [success, setSuccess] = useState('');
     const [errorHandler, setErrorHandler] = useState('');
     const [loading, setLoading] = useState(false)
@@ -112,7 +114,7 @@ function AddSubjectPopup({setOpenSubjectPopup,as,animate,initial,transition,cour
             const res = await axios({
                 method:'POST',
                 url:'/course/add-subject-to-course',
-                data:{title,courseId,courseTitle,token},
+                data:{title,courseId,courseTitle,link,token},
                 include:{withCredentials:true}
             })
             setSuccess(true);
@@ -134,6 +136,7 @@ function AddSubjectPopup({setOpenSubjectPopup,as,animate,initial,transition,cour
         <Container as={as} animate={animate} initial={initial} transition={transition}>
         <Title>Add Subject</Title>
         <TitleInput placeholder='Enter title' onChange={e => setTitle(e.target.value)}/>
+        <TitleInput placeholder='Enter your appointment link.' onChange={e => setLink(e.target.value)}/>
         <Button onClick={addSubjectButtonFunction}>Add Subject</Button>
         <CloseImg src={closeIcon} onClick={e => setOpenSubjectPopup(false)}/>
         

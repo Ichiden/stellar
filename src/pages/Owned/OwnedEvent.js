@@ -3,12 +3,14 @@ import styled from 'styled-components'
 import Cookies from 'universal-cookie';
 
 // ICONS
-import sampleCourseImg from '../../icons/samCourse.jpg'
 import QRCode from "react-qr-code";
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import CloudinaryImg from '../../components/Author/CloudinaryImg';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PdfCertificate from '../../components/Owned/PdfCertificate';
 
 const Container = styled.div`
     width:100%;
@@ -179,26 +181,81 @@ const QrContainer = styled.div`
 
 `
 
+const BottomMessage = styled.p`
+    color:#232323;
+    margin-top: 20px;
+`
+
 const Spinner = styled.div`
-   width: 60px;
-   height: 60px;
-   border-radius: 50%;
-   background: conic-gradient(#0000 10%,#ffffff);
-   background-color: red;
-   -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 3px),#000 0);
-   animation: spinner-zp9dbg 1s infinite linear;
-    position:absolute;
+  color: gray;
+  font-size: 45px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+  position:absolute;
     left:calc(50% - 30px);
-    top:100px;
+    top:50px;
 
 
+@keyframes mltShdSpin {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em,
+    0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+    0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 
+    0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 
+    0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, 
+    -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, 
+    -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+     -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, 
+     -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+     -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, 
+     -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 
+    0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
 
+@keyframes round {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+ 
+`
 
-   @keyframes spinner-zp9dbg {
-   to {
-      transform: rotate(1turn);
-   }
-}`
+const DownloadCertButton = styled.button`
+    width:200px;
+    padding:10px;
+    background-color: #2B6EC1;
+    border:0;
+    border-radius: 5px;
+    color:white;
+    cursor: pointer;
+    
+    &:hover{
+        opacity: .5;
+    }
+`
 
 const OwnedEvent = () => {
     const user = useSelector(state => state.user.currentUser);
@@ -245,17 +302,25 @@ const OwnedEvent = () => {
                 <LeftContainer>
                     {/* IMAGE */}
                     <MainImageContainer>
-                        <SampleImg src={sampleCourseImg} />
+                        <CloudinaryImg imageUrl='ztellar/psme LRC 2024/qsniqu3fmmxehktnj3zc' width='1280' height='680' widthMain='100%' heightMain='100%' objectFit='cover' borderRadius='15px' />
                     </MainImageContainer>
 
                     {/* TITLE */}
                     <Title>{data?.title}</Title>
 
                     {/* DATE */}
-                    <Date>{dateFrom.toLocaleDateString('en-US')} - {dateTo.toLocaleDateString('en-US')}</Date>
+                    <Date>{dateFrom.toDateString('en-US')} - {dateTo.toDateString('en-US')}</Date>
 
                     {/* PLACE */}
                     <Place>{data?.place}</Place>
+
+                    {/* MESSAGE */}
+                    <BottomMessage>After completing the course, a brief assessment will be provided for your learning. E-certificates can be downloaded post-event.</BottomMessage>
+                    
+                    <BottomMessage>Download button for certificate is for testing purposes only.</BottomMessage>
+                    <PDFDownloadLink document={<PdfCertificate fname={user?.fname} mname={user?.mname} lname={user?.lname} />} fileName='Lrc Certificate'>
+                        <DownloadCertButton>DOWNLOAD</DownloadCertButton>
+                    </PDFDownloadLink>
                 </LeftContainer>
 
                 {/* RIGHT CONTAINER */}

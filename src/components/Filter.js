@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 
 // ICONS
-import starIcon from '../icons/five-star.png'
 import closeIcon from '../icons/close.png'
 
 import {

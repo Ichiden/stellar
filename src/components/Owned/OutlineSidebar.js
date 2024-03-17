@@ -31,20 +31,24 @@ const OutlineSidebar = ({style,setSidebarCloser,data,setVideoData,videoData,user
   let videoIndex = recentSubjectData?.resume?.split('/')[1] || 0
   let currentTime = recentSubjectData?.resume?.split('/')[2] || 0
 
+  // console.log(recentSubjectData)
+
   // DI PWEDE WALANG LAMAN NA VIDEO
 
     useEffect(() => {
       const res = async() => {
           if(!videoData){
             let res = data[0]?.subjects[0]?.videos[0];
-            res.subjectIndex = subjectIndex;
-            res.index = videoIndex;
-            res.currentTime = currentTime;
+ 
+              res.subjectIndex = subjectIndex
+              res.index = videoIndex;
+              res.currentTime = currentTime;
+            
+
             await setVideoData(res)
-            console.log(res)
 
           }else{
-            console.log('meron')
+            // console.log('meron')
           }
         }
 

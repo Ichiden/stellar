@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import Cookies from 'universal-cookie';
+import CloudinaryImg from './Author/CloudinaryImg'
 
 // ICONS
 import closeIcon from '../icons/close.png'
-import userImage from '../icons/prof.jpg'
 import axios from 'axios'
 import { logout } from '../state/userSlice'
 // import { BottomContainer } from '../styles/ViewCourse.style'
@@ -158,6 +159,7 @@ function MobileIconSlide({setOpenMobileIconSlide,as,animate,initial,transition,s
     const user = useSelector(state => state.user.currentUser);
     const navigate = useNavigate();
     const dispatch = useDispatch()
+    const cookies = new Cookies(null, { path: '/' });
 
 
     // LOGOUT
@@ -169,6 +171,7 @@ function MobileIconSlide({setOpenMobileIconSlide,as,animate,initial,transition,s
                include:{withCredentials:true}
             })
             console.log(res)
+            cookies.remove('token')
             dispatch(logout())
             setOpenMobileIconSlide(false)
             navigate('/')
@@ -188,9 +191,11 @@ function MobileIconSlide({setOpenMobileIconSlide,as,animate,initial,transition,s
         <TopContainer>
             <CloseContainer onClick={e => setOpenMobileIconSlide(false)}>
                 <CloseImg src={closeIcon}/>
+                
             </CloseContainer>
-            <UserImage src={userImage} />
-            <Username>{user?.username}</Username>
+            {/* USER ICON */}
+            <CloudinaryImg imageUrl='ztellar/ztellar/pzoz9wj3y3onkg62dcdx' marginTop='30px' height='100' width='100' heightMain='100%' boxSizing='border-box' widthMain='140px'  borderRadius='50%' border='4px solid black' />
+            <Username>{user?.fname} {user?.lname}</Username>
             <Email>{user?.email}</Email>
         </TopContainer>
 

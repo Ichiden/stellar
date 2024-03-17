@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { useGoogleLogin } from '@react-oauth/google';
 import Cookies from 'universal-cookie';
-
 
 // ICONS
 import googleIcon from '../icons/google.png'
@@ -40,6 +38,7 @@ import { useSelector } from 'react-redux'
 function Login() {
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
+    const [errorHandler, setErrorHandler] = useState('');
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -66,10 +65,11 @@ function Login() {
                 sameSite:'None'
               }
             );
+            setErrorHandler('')
             dispatch(loginSuccess(res?.data?.data))
             navigate('/')
         }catch(err){
-            console.log(err.response.data.message)
+            setErrorHandler(err.response.data.message || err.message)
         }
     }
 
@@ -140,7 +140,7 @@ function Login() {
                 {/* {message == null && <Spinner />} */}
                 </LoginButton>
 
-                <Message>THIS IS MESSAGE</Message>
+                <Message>{errorHandler}</Message>
 
                 <OrContainer>
                     <Hr />
@@ -158,10 +158,10 @@ function Login() {
                     </GoogleButton>
 
                     {/* Facebook button */}
-                    <FbButton>
+                    {/* <FbButton>
                         <ButtonIcon src={googleIcon} />
                         Facebook
-                    </FbButton>
+                    </FbButton> */}
                 </BottomButtonsContainer>
 
                 

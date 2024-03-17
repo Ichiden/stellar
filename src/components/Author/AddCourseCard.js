@@ -45,7 +45,7 @@ function AddCourseCard({datas,setRefresher}) {
     <Container>
         <Wrapper>
             <ThumbnailContainer>
-                <CloudinaryImg imageUrl={datas?.image_url} width='240' height='120' />
+                <CloudinaryImg imageUrl={datas?.image_url} width='240' height='120' widthMain='100%' />
             </ThumbnailContainer>
             
             <RightContainer>

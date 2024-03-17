@@ -8,13 +8,11 @@ import Toastify from '../../components/Toastify'
 import Cookies from 'universal-cookie';
 // ICONS
 import OpenIcon from '../../icons/openArrow.png'
-import mean from '../../icons/mean.png'
 
 // COMPONENTS
 import Sidebar from '../../components/Author/Sidebar'
 import SubjectCard from '../../components/Author/SubjectCard'
 import AddSubjectPopup from '../../components/Author/AddSubjectPopup'
-import DeletePopup from '../../components/Author/DeletePopup'
 
 import {
     BodyWrapper,
@@ -263,7 +261,7 @@ function CourseSetup() {
                     <PageTitle>Setup Course</PageTitle>
                     <HeaderCardContainer>
                         <CourseImgContainer>
-                            <CourseImg src={mean} />
+                            {/* <CourseImg src={mean} /> */}
                         </CourseImgContainer>
                         <DetailsContainer>
                             <CourseTitleContainer>
