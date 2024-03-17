@@ -153,7 +153,7 @@ const ViewCourse = () => {
                             <BuyButtonTablet>Buy now</BuyButtonTablet>
                         </Link>
                         :
-                        <Link to={`/course?id=65f717865b1141c627d5f92e`}>
+                        <Link to={`/course?id=65f73f2ae5f0979b8772bcd1`}>
                             <BuyButtonTablet>Buy this course to avail the event</BuyButtonTablet>
                         </Link>
                         }
@@ -204,7 +204,7 @@ const ViewCourse = () => {
                             <BuyButton>Buy now</BuyButton>
                         </Link>
                         :
-                        <Link to={`/course?id=65f717865b1141c627d5f92e`}>
+                        <Link to={`/course?id=65f73f2ae5f0979b8772bcd1`}>
                             <BuyButton>Buy this course to avail the event</BuyButton>
                         </Link>
                         }
