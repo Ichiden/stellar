@@ -34,12 +34,13 @@ const PaymongoButton = ({price,courseId,ownerId,type,regType}) => {
   const createCheckoutSession = async(data) => {
     try{
       setState('loading')
-      const res =  await axios({
-        method:"POST",
-        url:"/paymongo/create-checkout-session",
-        data:{price,courseId,ownerId,type,regType,token},
-        include:{withCredentials:true}
-      })
+      // const res =  await axios({
+      //   method:"POST",
+      //   url:"/paymongo/create-checkout-session",
+      //   data:{price,courseId,ownerId,type,regType,token},
+      //   include:{withCredentials:true}
+      // })
+      const res = await axios.post('/paymongo/create-checkout-session',{price,courseId,ownerId,type,regType,token},{withCredentials:true})
       setState('success')
       // RETRIEVE CHECKOUT
       const checkoutId = res.data.id;
